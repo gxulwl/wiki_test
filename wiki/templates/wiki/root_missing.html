@@ -1,0 +1,35 @@
+{% extends "wiki/create_root.html" %}
+{% load i18n wiki_tags %}
+
+{% block wiki_contents %}
+
+<div class="row">
+  <div class="col-lg-2"></div>
+  <div class="col-lg-8">
+
+    <h1>恭喜！</h1>
+    <p class="lead">
+      你安装的wiki已经成功运行，但是现在没有页面可用
+    </p>
+
+    {% if not user.is_superuser %}
+      <p class="lead">
+            创建一个超级用户
+      </p>
+      {% login_url as wiki_login_url %}
+      {% if wiki_login_url %}
+        <a href="{{ wiki_login_url }}" class="btn btn-primary btn-lg">{% trans "Click here to login" %}</a>
+      {% endif %}
+
+    {% else %}
+
+      <p class="lead">
+        创建完成后即可开始
+      </p>
+      <a href="{% url 'wiki:root_create' %}" class="btn btn-primary btn-lg">正在创建第一篇文章</a>
+      {% endif %}
+  </div>
+  <div class="col-lg-2"></div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,101 @@
+<link href="/static/mdeditor/css/editormd.css" type="text/css" media="all" rel="stylesheet">
+<script src="/static/mdeditor/js/jquery.min.js"></script>
+<script src="/static/mdeditor/js/editormd.min.js"></script>
+
+<style type="text/css">
+    .wmd-wrapper  ul {
+        margin-left: 0px !important;
+    }
+    .wmd-wrapper ul li{
+        list-style: disc !important;
+    }
+    .wmd-wrapper ul ul li{
+        list-style: circle !important;
+    }
+    .wmd-wrapper h1,
+    .wmd-wrapper h2,
+    .wmd-wrapper h3,
+    .wmd-wrapper h4,
+    .wmd-wrapper h5,
+    .wmd-wrapper h6 {
+        background: #ffffff !important;
+        color: #000000 !important;
+    }
+    .wmd-wrapper h2,
+    .wmd-wrapper h3,
+    .wmd-wrapper h4{
+        padding: 0px !important;
+    }
+    .wmd-wrapper h5{
+        letter-spacing: 0px !important;
+        text-transform: none !important;
+        font-size: 1em !important;
+    }
+    .wmd-wrapper h6{
+        font-size: 1em !important;
+        color: #777 !important;
+    }
+</style>
+
+<div class="wmd-wrapper"  id="id_bug_detail-wmd-wrapper">
+    <textarea  cols="40" id="id_bug_detail" maxlength="65535" name="bug_detail" rows="10" required></textarea>
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+        editormd("id_bug_detail-wmd-wrapper", {
+            watch: true, // 关闭实时预览
+            lineNumbers: false,
+            lineWrapping: false,
+            width: "100%",
+            height: 500,
+            placeholder: '',
+            // 当有多个mdeditor时，全屏后，其他mdeditor仍然显示，解决此问题。
+            onfullscreen : function() {
+                this.editor.css("border-radius", 0).css("z-index", 9999);
+            },
+            onfullscreenExit : function() {
+                this.editor.css({
+                    zIndex : 10,
+                    border : "1px solid rgb(221,221,221)"
+                })
+            },
+            syncScrolling: "single",
+            path: "/static/mdeditor/js/lib/",
+            // theme
+            theme : "default",
+            previewTheme : "default",
+            editorTheme : "default",
+
+            saveHTMLToTextarea: true, // editor.md 有问题没有测试成功
+            toolbarAutoFixed: true,
+            searchReplace: true,
+            emoji: true,
+            tex: true,
+            taskList: false,
+            flowChart: true,
+            sequenceDiagram: true,
+
+            // image upload
+            imageUpload: true,
+            imageFormats: ['jpg', 'JPG', 'jpeg', 'JPEG', 'gif', 'GIF', 'png', 'PNG', 'bmp', 'BMP', 'webp', 'WEBP'],
+            imageUploadURL: "/mdeditor/uploads/",
+            toolbarIcons: function () {
+                return ['undo', 'redo', '|', 'bold', 'del', 'italic', 'quote', 'ucwords', 'uppercase', 'lowercase', '|', 'h1', 'h2', 'h3', 'h5', 'h6', '|', 'list-ul', 'list-ol', 'hr', '|', 'link', 'reference-link', 'image', 'code', 'preformatted-text', 'code-block', 'table', 'datetime', 'emoji', 'html-entities', 'pagebreak', 'goto-line', '|', 'help', 'info', '||', 'preview', 'watch', 'fullscreen']
+            },
+            onload: function () {
+                console.log('onload', this);
+                //this.fullscreen();
+                //this.unwatch();
+                //this.watch().fullscreen();
+
+                //this.setMarkdown("#PHP");
+                //this.width("100%");
+                //this.height(480);
+                //this.resize("100%", 640);
+            }
+        });
+
+    });
+</script>

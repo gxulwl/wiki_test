@@ -1,0 +1,13 @@
+{% load i18n %}
+
+<em>
+{% url 'wiki:signup' as signup_url %}
+{% url 'wiki:login' as login_url %}
+{% if login_url and signup_url %}
+  {% blocktrans trimmed %}
+  您需要 <a href="{{ login_url }}">登录</a> 或者 <a href="{{ signup_url }}">注册</a> 才能使用此功能
+  {% endblocktrans %}
+{% else %}
+  {% trans "您需要登录或注册才能使用此功能。" %}
+{% endif %}
+</em>
